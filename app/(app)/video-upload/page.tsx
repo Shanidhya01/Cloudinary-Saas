@@ -66,6 +66,7 @@ function VideoUpload() {
             className="textarea textarea-bordered w-full"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            spellCheck={false}
           ></textarea>
         </div>
         <div>
