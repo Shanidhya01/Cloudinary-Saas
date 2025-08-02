@@ -11,7 +11,9 @@ import {auth} from '@clerk/nextjs/server'
 
 interface CloudinaryUploadResult {
     public_id:string;
-    [key: string]:any
+    bytes?: number;
+    secure_url?: string;
+    [key: string]: unknown;
 }
 
 export async function POST(request: NextRequest){
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest){
             (resolve,reject) => {
                 const upload_stream = cloudinary.uploader.upload_stream(
                     {folder:'next-cloudinary-uploads'},
-                    (error,result) => {
+                    (error: Error | undefined, result?: CloudinaryUploadResult) => {
                     if(error) reject(error)
                     else resolve(result as CloudinaryUploadResult)
                 })

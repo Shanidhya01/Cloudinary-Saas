@@ -15,8 +15,9 @@ cloudinary.config({
 interface CloudinaryUploadResult {
     public_id: string;
     bytes: number;
-    duration?: number
-    [key: string]: any
+    duration?: number;
+    secure_url?: string;
+    [key: string]: unknown;
 }
 export async function POST(request: NextRequest) {
   try {
@@ -68,7 +69,7 @@ export async function POST(request: NextRequest) {
           folder: 'video-uploads',
           transformation: [{ quality: 'auto', fetch_format: 'mp4' }],
         },
-        (error, result) => {
+        (error: Error | undefined, result?: CloudinaryUploadResult) => {
           if (error) reject(error);
           else resolve(result as CloudinaryUploadResult);
         }
@@ -90,10 +91,11 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(video, { status: 201 });
-  } catch (error: any) {
-    console.error('Upload video failed:', error.message || error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Upload video failed:', errorMessage);
     return NextResponse.json(
-      { error: 'Upload video failed', details: error.message || error },
+      { error: 'Upload video failed', details: errorMessage },
       { status: 500 }
     );
   } finally {
