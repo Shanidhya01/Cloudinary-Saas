@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Your existing styles... */
+
 :root {
   /* Light theme colors */
   --background: #ffffff;k

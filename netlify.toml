@@ -1,25 +1,15 @@
 [build]
-  # Generate Prisma client before building
   command = "npx prisma generate && npm run build"
   publish = ".next"
 
 [build.environment]
-  # Node.js version
   NODE_VERSION = "18"
-  # Ensure production environment
   NODE_ENV = "production"
-  # Skip Husky installation in CI
-  HUSKY_SKIP_INSTALL = "1"
 
-# Netlify Functions configuration (if using API routes)
-[functions]
-  node_bundler = "esbuild"
-
-# Next.js specific plugin
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Environment variables that should be available during build
+# Environment Variables by Context
 [context.production.environment]
   NODE_ENV = "production"
 
@@ -29,7 +19,6 @@
 [context.branch-deploy.environment]
   NODE_ENV = "production"
 
-# Headers for security and performance
 [[headers]]
   for = "/*"
   [headers.values]
@@ -39,7 +28,6 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-# Cache static assets
 [[headers]]
   for = "/static/*"
   [headers.values]
@@ -50,19 +38,11 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Redirects for SPA routing (if needed)
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
 
-# Handle client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Build optimization
 [build.processing]
   skip_processing = false
 
