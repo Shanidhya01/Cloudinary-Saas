@@ -61,11 +61,6 @@
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = {Role = ["admin"]}
-
-# Edge functions (if using any)
-[edge_functions]
-  # Add any edge function configurations here if needed
 
 # Build optimization
 [build.processing]
