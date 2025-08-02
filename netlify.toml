@@ -1,5 +1,5 @@
 [build]
-  command = "npx prisma generate && npm run build"
+  command = "npx prisma generate && npm install --legacy-peer-deps && npm run build"
   publish = ".next"
 
 [build.environment]

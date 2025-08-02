@@ -3,11 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your existing styles... */
 
 :root {
   /* Light theme colors */
-  --background: #ffffff;k
+  --background: #ffffff;
   --foreground: #0a0a0a;
   --muted: #f6f6f6;
   --muted-foreground: #737373;
